@@ -185,7 +185,7 @@ app.get('/post/:id', async (req, res) => {
   // Read the HTML template from the file
   fs.readFile(path.join(__dirname, 'post-detail.html'), 'utf8', (err, data) => {
     if (err) {
-      console.log(err);
+      console.error(err);
       return res.status(500).send('Internal Server Error');
     }
 
