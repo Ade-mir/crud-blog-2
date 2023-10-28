@@ -202,7 +202,7 @@ app.get('/post/:id', async (req, res) => {
 });
 
 // Delete post
-app.delete('/posts:id', authenticateJWT, async (req, res) => {
+app.delete('/posts/:id', authenticateJWT, async (req, res) => {
   if (req.user.role == 'admin') {
     try {
       await Post.findByIdAndDelete(req.params.id);
@@ -216,7 +216,7 @@ app.delete('/posts:id', authenticateJWT, async (req, res) => {
 });
 
 // Update Post
-app.put('/posts:id', authenticateJWT, async (req, res) => {
+app.put('/posts/:id', authenticateJWT, async (req, res) => {
   const { title, content } = req.body;
   const postId = req.params.id;
 
