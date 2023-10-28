@@ -65,8 +65,8 @@ async function fetchPosts(baseUrl) {
           <div class="post-title">
             ${
               index === 0
-                ? `<h1><a href="/post/${post._id}">${post.title}</<a></h1>`
-                : `<h3><a href="/post/${post._id}">${post.title}</<a></h3>`
+                ? `<h1><a href="/post/${post._id}">${post.title}</a></h1>`
+                : `<h3><a href="/post/${post._id}">${post.title}</a></h3>`
             }
           </div>
           ${
