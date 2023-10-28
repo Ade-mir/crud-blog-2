@@ -175,7 +175,7 @@ app.post('/posts', authenticateJWT, async (req, res) => {
   }
 });
 
-app.get('/post:id', async (req, res) => {
+app.get('/post/:id', async (req, res) => {
   const postId = req.params.id;
   const post = await Post.findById(postId);
   if (!post) {
