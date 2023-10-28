@@ -78,7 +78,7 @@ async function fetchPosts(baseUrl) {
             <button class="btn" style="${deleteButtonStyle}" onclick="deletePost('${
           post._id
         }', '${baseUrl}')">Delete</button>
-            <button class="btn" style="${deleteButtonStyle}" onclick="showUpdateForm('${
+            <button class="btn" style="${updateButtonStyle}" onclick="showUpdateForm('${
           post._id
         }', '${post.title}', '${post.content}')">Update</button>
           </div>
@@ -135,7 +135,7 @@ async function createPost(event, baseUrl) {
     const response = await fetch(`${baseUrl}/posts`, requestOptions);
     if (!response.ok) {
       const storedRole = localStorage.getItem('userRole');
-      console.log(`Error creating the post: HTTP Status ${response.status}`);
+      console.error(`Error creating the post: HTTP Status ${response.status}`);
     } else {
       // Clear the input data
       titleInput.value = '';
@@ -144,7 +144,7 @@ async function createPost(event, baseUrl) {
       alert('Create post successful!');
     }
   } catch (error) {
-    console.log('An errro occured during the fetch:', error);
+    console.error('An errro occured during the fetch:', error);
     alert('Create post failed.');
   }
   fetchPosts(baseUrl);
@@ -187,7 +187,7 @@ function showUpdateForm(postId, title, content) {
   postElement.innerHTML += updateForm;
 
   const form = document.getElementById('update-form');
-  form.addEventListener('submit', (event) => updateForm(event, postId));
+  form.addEventListener('submit', (event) => updatePost(event, postId));
 }
 
 // Update post
@@ -215,7 +215,7 @@ async function updatePost(event, postId) {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${storedToken}`,
       },
-      body: JSON.stringify(updatePost),
+      body: JSON.stringify(updatedPost),
     });
 
     if (response.ok) {
