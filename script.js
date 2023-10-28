@@ -47,6 +47,50 @@ window.addEventListener('load', () => {
 });
 
 // Fetch posts
+// async function fetchPosts(baseUrl) {
+//   const res = await fetch(`${baseUrl}/posts`);
+//   const data = await res.json();
+//   const postsList = document.getElementById('posts-list');
+//   const isAdmin = localStorage.getItem('userRole') === 'admin';
+
+//   if (postsList) {
+//     postsList.innerHTML = data
+//       .map((post, index) => {
+//         const deleteButtonStyle = isAdmin ? '' : 'display: none';
+//         const updateButtonStyle = isAdmin ? '' : 'display: none';
+
+//         return `
+//       <div id="${post._id}" class="post">
+//           <img src="${post.imageUrl}" alt="Image" />
+//           <div class="post-title">
+//             ${
+//               index === 0
+//                 ? `<h1><a href="/post/${post._id}">${post.title}</<a></h1>`
+//                 : `<h3><a href="/post/${post._id}">${post.title}</<a></h3>`
+//             }
+//           </div>
+//           ${
+//             index === 0
+//               ? `<span><p>${post.author}</p><p>${post.timestamp}</p></span>`
+//               : ''
+//           }
+//           <div id="admin-buttons">
+//             <button class="btn" style="${deleteButtonStyle} onclick="deletePost('${
+//           post._id
+//         }', '${baseUrl}')">Delete</button>
+//             <button class="btn" style="${deleteButtonStyle} onclick="showUpdateForm('${
+//           post._id
+//         }', '${post.title}', '${post.content}')">Update</button>
+//           </div>
+//           ${index === 0 ? '<hr>' : ''}
+//           ${index === 0 ? '<h2>All Articles</h2>' : ''}
+//         </div>
+//       `;
+//       })
+//       .join('');
+//   }
+// }
+
 async function fetchPosts(baseUrl) {
   const res = await fetch(`${baseUrl}/posts`);
   const data = await res.json();
@@ -63,29 +107,29 @@ async function fetchPosts(baseUrl) {
       <div id="${post._id}" class="post">
           <img src="${post.imageUrl}" alt="Image" />
           <div class="post-title">
-            ${
-              index === 0
-                ? `<h1><a href="/post/${post._id}">${post.title}</<a></h1>`
-                : `<h3><a href="/post/${post._id}">${post.title}</<a></h3>`
-            }
-          </div>
+          ${
+            index === 0
+              ? `<h1><a href="/post/${post._id}">${post.title}</a></h1>`
+              : `<h3><a href="/post/${post._id}">${post.title}</a></h3>`
+          }
+        </div>
           ${
             index === 0
               ? `<span><p>${post.author}</p><p>${post.timestamp}</p></span>`
               : ''
           }
           <div id="admin-buttons">
-            <button class="btn" style="${deleteButtonStyle} onclick="deletePost('${
+          <button class="btn" style="${deleteButtonStyle}" onclick="deletePost('${
           post._id
         }', '${baseUrl}')">Delete</button>
-            <button class="btn" style="${deleteButtonStyle} onclick="showUpdateForm('${
+          <button class="btn" style="${updateButtonStyle}" onclick="showUpdateForm('${
           post._id
         }', '${post.title}', '${post.content}')">Update</button>
           </div>
           ${index === 0 ? '<hr>' : ''}
           ${index === 0 ? '<h2>All Articles</h2>' : ''}
-        </div>
-      `;
+      </div>
+    `;
       })
       .join('');
   }
